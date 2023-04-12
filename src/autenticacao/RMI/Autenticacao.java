@@ -12,6 +12,6 @@ public interface Autenticacao {
     public boolean autenticacao(String nome, String senha) throws RemoteException;
 
     // método para verificar a possibilidade de um usuário possur permissão para acessar um objeto
-    public boolean autorizacao(String nome, String objectName, String permissao) throws RemoteException;
+    public boolean autorizacao(String nome, String objeto, String permissao) throws RemoteException;
     
 }
