@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import autenticacao.RMI.Usuario;
+
 public class AutenticacaoImpl implements Autenticacao {
 	
 	//guarda os pares-chave valor em uma tabela
@@ -19,11 +21,18 @@ public class AutenticacaoImpl implements Autenticacao {
 
     @Override
     public void registraUsuario(String nome, String senha, String permissao) throws RemoteException {
+    	try {
+    		Usuario usuario = new Usuario(nome, senha, permissao); //cadastrando usuario na classe usuario
+    	} catch (Exception e) {
+    		System.out.println("Erro ao registrar usuário na classe cliente");
+            e.printStackTrace();
+    	}
+    	
         try {
             this.usuario.put(nome, senha);
             this.permissao.put(nome, permissao);
         } catch (Exception e) {
-            System.out.println("Erro ao registrar usuário");
+            System.out.println("Erro ao registrar usuário no map");
             e.printStackTrace();
         }
     }
