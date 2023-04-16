@@ -1,7 +1,6 @@
 package autenticacao.RMI;
 
 import java.net.MalformedURLException;
-import java.rmi.AlreadyBoundException;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -13,6 +12,7 @@ public class Servidor {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
+        int op;
 
         try {
             System.setProperty("java.rmi.server.hostname","127.0.0.1");
@@ -25,14 +25,39 @@ public class Servidor {
 
 
             System.out.println("Servidor pronto!");
-            sc.nextInt();
 
-            String [] lista = registry.list(); //lista de objetos remotos
-            for (String string : lista) {
-                System.out.println("Obj:" + string);
-            }
+            do {
+                System.out.println("\n------------- MENU -------------");
+                System.out.println("1 - Listar objetos remotos");
+                System.out.println("2 - Listar usuários registrados");
+                System.out.println("3 - Listar objetos");
+                System.out.println("4 - Encerrar servidor");
+                System.out.println("--------------------------------");
+                System.out.print("\nDigite sua opção: ");
+                op = sc.nextInt();
+                sc.nextLine();
 
-            sc.nextInt();
+                switch (op){
+                    case 1:
+                        String [] lista = registry.list();
+                        for (String string : lista) {
+                            System.out.println("Obj:" + string);
+                        }
+                        break;
+
+                    case 2:
+                        ((AutenticacaoImpl) autenticacao).listaUsuarios();
+                        break;
+
+                    case 3:
+                        ((AutenticacaoImpl) autenticacao).listaObjetos();
+                        break;
+
+                    case 4: break;
+
+                    default: System.out.println("Opção inválida!");
+                }
+            }while (op != 3);
 
         } catch (RemoteException | MalformedURLException e) {
             System.out.println("Sistema com ERRO!!!!");
