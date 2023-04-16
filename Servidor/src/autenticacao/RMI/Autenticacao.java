@@ -9,5 +9,5 @@ public interface Autenticacao extends Remote {
     boolean registraUsuario(String nome, String senha, String permissao) throws RemoteException;
 
     // método que autentica um usuário e o autoriza a operar um objeto
-    boolean solicitaAcesso(String nome, String senha, String objeto, String operacao) throws RemoteException;
+    String solicitaAcesso(String nome, String senha, String objeto, String operacao) throws RemoteException;
 }
