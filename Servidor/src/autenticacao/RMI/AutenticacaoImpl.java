@@ -1,13 +1,14 @@
 package autenticacao.RMI;
 
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import autenticacao.RMI.Usuario;
 
-public class AutenticacaoImpl implements Autenticacao {
+public class AutenticacaoImpl extends UnicastRemoteObject implements Autenticacao {
 	
 	//guarda os pares-chave valor em uma tabela
     private Map<String, String> usuario = new HashMap<>();
@@ -60,5 +61,8 @@ public class AutenticacaoImpl implements Autenticacao {
         }
     }
 
+    public void hello(String nome) throws RemoteException{
+        System.out.println("Hello " + nome);
+    }
 
 }
