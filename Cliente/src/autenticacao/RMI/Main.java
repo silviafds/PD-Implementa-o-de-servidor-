@@ -31,6 +31,7 @@ public class Main {
                 System.out.println("--------------------------------");
                 System.out.print("\nDigite sua opção: ");
                 op = sc.nextInt();
+                sc.nextLine();
 
                 switch (op){
                     case 1:
