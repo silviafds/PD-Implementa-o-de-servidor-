@@ -1,9 +1,6 @@
 package autenticacao.RMI;
 
-import autenticacao.RMI.Autenticacao;
-
 import java.rmi.Naming;
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Main {
@@ -14,14 +11,11 @@ public class Main {
         int op;
 
         try {
-            //obter objeto de forma remota
+            // Obter objeto de forma remota
             Autenticacao auth = (Autenticacao) Naming.lookup("rmi://127.0.0.1:1099/AutenticacaoImpl");
 
             Administrador admin = new Administrador();
             Usuario user = new Usuario();
-
-            final String nomeAdmin = "admin";
-            final String senhaAdmin = "admin";
 
             do {
                 System.out.println("\n------------- MENU -------------");
@@ -39,14 +33,18 @@ public class Main {
                         String nomeCriador = sc.nextLine();
                         System.out.print("Digite a sua senha: ");
                         String senhaCriador = sc.nextLine();
-                        if (nomeCriador.equals(nomeAdmin) && senhaCriador.equals(senhaAdmin)) {
+                        if (auth.ehAdmin(nomeCriador, senhaCriador)) {
                             System.out.print("Digite o nome do usuário a ser registrado: ");
                             String nome = sc.nextLine();
                             System.out.print("Digite a senha do usuário a ser registrado: ");
                             String senha = sc.nextLine();
-                            System.out.print("Digite as permissões que o usuário registrado terá: ");
-                            String permissao = sc.nextLine();
-                            if (auth.registraUsuario(nome, senha, permissao)) {
+                            System.out.print("O novo usuário terá permissão de leitura? (s/n): ");
+                            String podeLer = sc.nextLine();
+                            System.out.print("O novo usuário terá permissão de escrita? (s/n): ");
+                            String podeEscrever = sc.nextLine();
+                            System.out.print("O novo usuário será adminstrador? (s/n): ");
+                            String ehAdmin = sc.nextLine();
+                            if (admin.registraUsuario(auth, nome, senha, podeLer.equals("s"), podeEscrever.equals("s"), ehAdmin.equals("s"))) {
                                 System.out.println("\nUsuário registrado com sucesso!");
                             } else {
                                 System.out.println("\nErro ao registrar usuário!");
@@ -57,18 +55,21 @@ public class Main {
                         break;
 
                     case 2:
-                        System.out.println("Digite o seu nome: ");
+                        System.out.print("Digite o seu nome: ");
                         String nomeUsuario = sc.nextLine();
-                        System.out.println("Digite a sua senha: ");
+                        System.out.print("Digite a sua senha: ");
                         String senhaUsuario = sc.nextLine();
-                        System.out.println("Digite o nome do objeto que deseja acessar: ");
+                        System.out.print("Digite o nome do objeto que deseja acessar: ");
                         String nomeObjeto = sc.nextLine();
-                        System.out.println("Digite a operação que deseja realizar (\"ler\" ou \"escrever\"): ");
+                        System.out.print("Digite a operação que deseja realizar (1 - Ler | 2 - Escrever): ");
                         String operacao = sc.nextLine();
-                        if (user.solicitaAcesso(auth, nomeUsuario, senhaUsuario, nomeObjeto, operacao)) {
-                            System.out.println("Acesso concedido!");
+                        if (operacao.equals("1")) {
+                            System.out.println("\n" + user.solicitaAcesso(auth, nomeUsuario, senhaUsuario, nomeObjeto, "ler"));
+                        } else if (operacao.equals("2")) {
+                            System.out.println("\n" + user.solicitaAcesso(auth, nomeUsuario, senhaUsuario, nomeObjeto, "escrever"));
                         } else {
-                            System.out.println("Acesso negado!");
+                            System.out.println("\nOperação inválida!");
+                            break;
                         }
                         break;
 

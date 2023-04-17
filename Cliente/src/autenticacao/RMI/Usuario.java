@@ -6,16 +6,19 @@ public class Usuario {
 	
 	private String nome;
 	private String senha;
-	private String autorizacao;
+	private boolean podeLer;
+
+	private boolean podeEscrever;
 
 	public  Usuario () {
 	}
 
-	public Usuario(String nome, String senha, String autorizacao) {
+	public Usuario(String nome, String senha, boolean podeLer, boolean podeEscrever) {
 		super();
 		this.nome = nome;
 		this.senha = senha;
-		this.autorizacao = autorizacao;
+		this.podeLer = podeLer;
+		this.podeEscrever = podeEscrever;
 	}
 
 	public String getNome() {
@@ -34,16 +37,23 @@ public class Usuario {
 		this.senha = senha;
 	}
 
-	public String getAutorizacao() {
-		return autorizacao;
+	public boolean isPodeLer() {
+		return podeLer;
 	}
 
-	public void setAutorizacao(String autorizacao) {
-		this.autorizacao = autorizacao;
+	public void setPodeLer(boolean podeLer) {
+		this.podeLer = podeLer;
 	}
 
-	public boolean solicitaAcesso(Autenticacao auth, String nome, String senha, String objeto, String operacao) throws RemoteException {
+	public boolean isPodeEscrever() {
+		return podeEscrever;
+	}
+
+	public void setPodeEscrever(boolean podeEscrever) {
+		this.podeEscrever = podeEscrever;
+	}
+
+	public String solicitaAcesso(Autenticacao auth, String nome, String senha, String objeto, String operacao) throws RemoteException {
 		return auth.solicitaAcesso(nome, senha, objeto, operacao);
 	}
-
 }

@@ -19,11 +19,16 @@ public class AutenticacaoImpl extends UnicastRemoteObject implements Autenticaca
 
     // Método que cadastra novo usuário
     @Override
-    public boolean registraUsuario(String nome, String senha, String permissao) throws RemoteException {
+    public boolean registraUsuario(String nome, String senha, boolean podeLer, boolean podeEscrever, boolean ehAdmin) throws RemoteException {
         try {
             // Verifica se o usuário já existe
             if (getUsuario(nome) == null) {
-                usuarios.add(new Usuario(nome, senha, permissao));
+                // Verifica se o usuário é administrador
+                if (ehAdmin) {
+                    usuarios.add(new Administrador(nome, senha, podeLer, podeEscrever));
+                } else {
+                    usuarios.add(new Usuario(nome, senha, podeLer, podeEscrever));
+                }
                 return true;
             }
             return false;
@@ -40,29 +45,53 @@ public class AutenticacaoImpl extends UnicastRemoteObject implements Autenticaca
     public String solicitaAcesso(String nome, String senha, String objeto, String operacao) throws RemoteException {
         try {
             // Verifica se o usuário existe e se a senha está correta
-            Usuario usuario = getUsuario(nome);
+            Usuario usuario = autentica(nome, senha);
             if (usuario != null) {
-                if (usuario.getSenha() != null && usuario.getSenha().equals(senha)) {
-                    if (!operacao.equals("") && usuario.getAutorizacao().contains(operacao)) {
+                if (!operacao.equals("")) {
+                    if (operacao.equals("ler") && usuario.isPodeLer()) {
                         if (!objetos.contains(objeto)) {
-                            if (operacao.equals("escrever")) {
-                                objetos.add(objeto);
-                                return "Objeto criado!";
-                            } else {
-                                return "Objeto não existe!";
-                            }
+                            return "Objeto não existe!";
                         }
                         return "Acesso concedido!";
-                    } else {
-                        return "Acesso negado!";
+
+                    } else if (operacao.equals("escrever") && usuario.isPodeEscrever()) {
+                        if (!objetos.contains(objeto)) {
+                            objetos.add(objeto);
+                            return "Objeto criado!";
+                        }
+                        return "Acesso concedido!";
                     }
                 }
+                if (!objetos.contains(objeto)) {
+                    objetos.add(objeto);
+                    return "Objeto não existe!";
+                }
+                return "Acesso negado!";
             }
             return "Usuário não encontrado!";
         } catch (Exception e) {
             e.printStackTrace();
             return "Erro ao solicitar acesso!";
         }
+    }
+
+    public Usuario autentica (String nome, String senha) throws RemoteException {
+        // Verifica se o usuário existe e se a senha está correta
+        Usuario usuario = getUsuario(nome);
+        if (usuario != null) {
+            if (usuario.getSenha() != null && usuario.getSenha().equals(senha)) {
+                return usuario;
+            }
+        }
+        return null;
+    }
+
+    public boolean ehAdmin(String nome, String senha) throws RemoteException {
+        Usuario usuario = autentica(nome, senha);
+        if (usuario != null) {
+            return usuario instanceof Administrador;
+        }
+        return false;
     }
 
     public void listaUsuarios() throws RemoteException {
@@ -74,7 +103,8 @@ public class AutenticacaoImpl extends UnicastRemoteObject implements Autenticaca
                 System.out.println("--------------------------------");
                 System.out.println("Nome: " + usuario.getNome());
                 System.out.println("Senha: " + usuario.getSenha());
-                System.out.println("Permissão: " + usuario.getAutorizacao());
+                System.out.println("Leitura: " + usuario.isPodeLer());
+                System.out.println("Escrita: " + usuario.isPodeEscrever());
             }
             System.out.println("--------------------------------\n");
         }
@@ -82,7 +112,7 @@ public class AutenticacaoImpl extends UnicastRemoteObject implements Autenticaca
 
     public void listaObjetos() throws RemoteException {
         if (objetos.isEmpty()) {
-            System.out.println("Nenhum objeto cadastrado");
+            System.out.println("\nNenhum objeto cadastrado!");
         } else {
             System.out.println();
             for (String obj : objetos) {
@@ -91,10 +121,9 @@ public class AutenticacaoImpl extends UnicastRemoteObject implements Autenticaca
             }
             System.out.println("--------------------------------\n");
         }
-
     }
 
-    private Usuario getUsuario(String nome) {
+    private Usuario getUsuario(String nome) throws RemoteException {
         for (Usuario usuario : usuarios) {
             if (usuario.getNome().equals(nome)) {
                 return usuario;

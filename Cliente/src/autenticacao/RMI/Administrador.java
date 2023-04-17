@@ -4,27 +4,15 @@ import java.rmi.RemoteException;
 
 public class Administrador extends Usuario {
 
-	private int identificador;
-
 	public Administrador() {
 		super();
 	}
 
-	public Administrador(String nome, String senha, String autorizacao, int identificador) {
-		super(nome, senha, autorizacao);
-		this.identificador = identificador;
+	public Administrador(String nome, String senha, boolean podeLer, boolean podeEscrever) {
+		super(nome, senha, podeLer, podeEscrever);
 	}
 
-	public int getIdAdm() {
-		return identificador;
+	boolean registraUsuario(Autenticacao auth, String nome, String senha, boolean podeLer, boolean podeEscrever, boolean ehAdmin) throws RemoteException {
+		return auth.registraUsuario(nome, senha, podeLer, podeEscrever, ehAdmin);
 	}
-
-	public void setIdAdm(int idAdm) {
-		this.identificador = idAdm;
-	}
-
-	void registraUsuario(Autenticacao auth, String nome, String senha, String permissao) throws RemoteException {
-		auth.registraUsuario(nome, senha, permissao);
-	}
-	
 }

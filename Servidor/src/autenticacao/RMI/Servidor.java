@@ -15,7 +15,7 @@ public class Servidor {
         int op;
 
         try {
-            System.setProperty("java.rmi.server.hostname","127.0.0.1");
+            System.setProperty("java.rmi.server.hostname", "127.0.0.1");
 
             Autenticacao autenticacao = new AutenticacaoImpl();  //objeto criado
 
@@ -23,6 +23,8 @@ public class Servidor {
 
             Naming.rebind("rmi://127.0.0.1:1099/AutenticacaoImpl", autenticacao);
 
+            // Cria usuário administrador
+            autenticacao.registraUsuario("admin", "admin", true, true, true);
 
             System.out.println("Servidor pronto!");
 
@@ -37,9 +39,9 @@ public class Servidor {
                 op = sc.nextInt();
                 sc.nextLine();
 
-                switch (op){
+                switch (op) {
                     case 1:
-                        String [] lista = registry.list();
+                        String[] lista = registry.list();
                         for (String string : lista) {
                             System.out.println("Obj:" + string);
                         }
@@ -53,16 +55,16 @@ public class Servidor {
                         ((AutenticacaoImpl) autenticacao).listaObjetos();
                         break;
 
-                    case 4: break;
+                    case 4:
+                        break;
 
-                    default: System.out.println("Opção inválida!");
+                    default:
+                        System.out.println("Opção inválida!");
                 }
-            }while (op != 3);
+            } while (op != 4);
 
         } catch (RemoteException | MalformedURLException e) {
             System.out.println("Sistema com ERRO!!!!");
         }
-
     }
-
 }
