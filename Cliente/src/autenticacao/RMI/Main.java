@@ -42,7 +42,7 @@ public class Main {
                             String podeLer = sc.nextLine();
                             System.out.print("O novo usuário terá permissão de escrita? (s/n): ");
                             String podeEscrever = sc.nextLine();
-                            System.out.print("O novo usuário será adminstrador? (s/n): ");
+                            System.out.print("O novo usuário será administrador? (s/n): ");
                             String ehAdmin = sc.nextLine();
                             if (admin.registraUsuario(auth, nome, senha, podeLer.equals("s"), podeEscrever.equals("s"), ehAdmin.equals("s"))) {
                                 System.out.println("\nUsuário registrado com sucesso!");
