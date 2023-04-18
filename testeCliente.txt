@@ -1,9 +1,9 @@
 Arquivo de testes
 
-Opção 1:
+Opção 1: Registrar novo usuário
 
 Nos campos de "Digite o seu nome" e "Digite a sua senha" deve-se escrever os dados do administrador, por padrão, basta escrever "admin" nos dois campos.
-Para usuários que são administradores, basta escrever seu nome e senha.
+Para novos usuários que são inseridos no sistema como administrador, basta escrever seu nome e senha.
 
 # REGISTRAR NOVO USUÁRIO COM TODAS AS PERMISSÕES E TORNANDO-SE ADMINISTRADOR
 
@@ -50,13 +50,20 @@ O novo usuário terá permissão de escrita? (s/n): n
 O novo usuário será administrador? (s/n): n
 Resultado: Usuário registrado com sucesso!
 
-# REGISTRAR NOVO USUÁRIO COM PESSOA SEM AUTORIZAÇÃO DE ADMNISTRADOR
+# REGISTRAR NOVO USUÁRIO COM CLIENTE EXISTENTE QUE NÃO POSSUI AUTORIZAÇÃO DE ADMNISTRADOR
 
-Digite o seu nome: luana
+Digite o seu nome: luana  (CLIENTE EXISTENTE) 
 Digite a sua senha: luana
 Resultado: Você não tem permissão para registrar usuários!
 
-Opção 2: 
+# REGISTRAR USUÁRIO QUE JÁ EXISTE NO SISTEMA
+
+Digite o seu nome: leo
+Digite a sua senha: leo
+Resultado: Erro ao registrar usuário!
+
+
+Opção 2: Solicitar acesso a um objeto
 
 # USUÁRIO TENTA LER OBJETO QUE NÃO EXISTE 
 
