@@ -1,0 +1,108 @@
+Arquivo de testes
+
+Opção 1:
+
+Nos campos de "Digite o seu nome" e "Digite a sua senha" deve-se escrever os dados do administrador, por padrão, basta escrever "admin" nos dois campos.
+Para usuários que são administradores, basta escrever seu nome e senha.
+
+# REGISTRAR NOVO USUÁRIO COM TODAS AS PERMISSÕES E TORNANDO-SE ADMINISTRADOR
+
+Digite o nome do usuário a ser registrado: ana
+Digite a senha do usuśrio a ser registrado: ana
+O novo usuário terá permissão de leitura? (s/n): s
+O novo usuário terá permissão de escrita? (s/n): s
+O novo usuário será administrador? (s/n): s
+Resultado: Usuário registrado com sucesso!
+
+# REGISTRAR NOVO USUÁRIO COM TODAS AS PERMISSÕES E NÃO SENDO ADMINISTRADOR
+
+Digite o nome do usuário a ser registrado: luana
+Digite a senha do usuśrio a ser registrado: luana
+O novo usuário terá permissão de leitura? (s/n): s
+O novo usuário terá permissão de escrita? (s/n): s
+O novo usuário será administrador? (s/n): n
+Resultado: Usuário registrado com sucesso!
+
+# REGISTRAR NOVO USUÁRIO COM PERMISSÃO DE LEITURA E NÃO SENDO ADMINISTRADOR
+
+Digite o nome do usuário a ser registrado: mateus
+Digite a senha do usuśrio a ser registrado: mateus
+O novo usuário terá permissão de leitura? (s/n): s
+O novo usuário terá permissão de escrita? (s/n): n
+O novo usuário será administrador? (s/n): n
+Resultado: Usuário registrado com sucesso!
+
+# REGISTRAR NOVO USUÁRIO COM PERMISSÃO DE ESCRITA E NÃO SENDO ADMINISTRADOR
+
+Digite o nome do usuário a ser registrado: luan
+Digite a senha do usuśrio a ser registrado: luan
+O novo usuário terá permissão de leitura? (s/n): n
+O novo usuário terá permissão de escrita? (s/n): s
+O novo usuário será administrador? (s/n): n
+Resultado: Usuário registrado com sucesso!
+
+# REGISTRAR NOVO USUÁRIO COM NENHUMA PERMISSÃO E NÃO SENDO ADMINISTRADOR
+
+Digite o nome do usuário a ser registrado: leo
+Digite a senha do usuśrio a ser registrado: leo
+O novo usuário terá permissão de leitura? (s/n): n
+O novo usuário terá permissão de escrita? (s/n): n
+O novo usuário será administrador? (s/n): n
+Resultado: Usuário registrado com sucesso!
+
+# REGISTRAR NOVO USUÁRIO COM PESSOA SEM AUTORIZAÇÃO DE ADMNISTRADOR
+
+Digite o seu nome: luana
+Digite a sua senha: luana
+Resultado: Você não tem permissão para registrar usuários!
+
+Opção 2: 
+
+# USUÁRIO TENTA LER OBJETO QUE NÃO EXISTE 
+
+Digite o seu nome: ana
+Digite a sua senha: ana
+Digite o nome do objeto que deseja acessar: obj1
+Digite a operação que deseja realizar (1 - Ler | 2 - Escrever): 1
+Resultado: Objeto não existe!
+
+# USUÁRIO TENTA ESCREVER OBJETO QUE NÃO EXISTE 
+
+Digite o seu nome: ana
+Digite a sua senha: ana
+Digite o nome do objeto que deseja acessar: obj1
+Digite a operação que deseja realizar (1 - Ler | 2 - Escrever): 2
+Resultado: Objeto criado!
+
+# USUÁRIO COM PERMISSÃO DE LEITURA TENTA LER OBJETO QUE EXISTE 
+
+Digite o seu nome: luan
+Digite a sua senha: luan
+Digite o nome do objeto que deseja acessar: obj1
+Digite a operação que deseja realizar (1 - Ler | 2 - Escrever): 1
+Resultado: Acesso concedido!
+
+# USUÁRIO COM PERMISSÃO DE LEITURA TENTA ESCREVER OBJETO QUE EXISTE 
+
+Digite o seu nome: luan
+Digite a sua senha: luan
+Digite o nome do objeto que deseja acessar: obj1
+Digite a operação que deseja realizar (1 - Ler | 2 - Escrever): 2
+Resultado: Acesso negado!
+
+# USUÁRIO QUE NÃO TEM PERMISSÃO PARA NADA TENTA ESCREVER OBJETO QUE NÃO EXISTE 
+
+Digite o seu nome: leo
+Digite a sua senha: leo
+Digite o nome do objeto que deseja acessar: obj2
+Digite a operação que deseja realizar (1 - Ler | 2 - Escrever): 2
+Resultado: Objeto não existe!
+
+
+# USUÁRIO ADMIN TEM PERMISSÃO PARA LER E ESCREVER OBJETO QUE EXISTE 
+
+Digite o seu nome: admin
+Digite a sua senha: admin
+Digite o nome do objeto que deseja acessar: obj1
+Digite a operação que deseja realizar (1 - Ler | 2 - Escrever): 2
+Resultado: Acesso concedido!
