@@ -47,24 +47,18 @@ public class AutenticacaoImpl extends UnicastRemoteObject implements Autenticaca
             // Verifica se o usuario existe e se a senha esta correta
             Usuario usuario = autentica(nome, senha);
             if (usuario != null) {
-                if (!operacao.equals("")) {
-                    if (operacao.equals("ler") && usuario.isPodeLer()) {
-                        if (!objetos.contains(objeto)) {
-                            return "Objeto nao existe!";
-                        }
-                        return "Acesso concedido!";
-
-                    } else if (operacao.equals("escrever") && usuario.isPodeEscrever()) {
-                        if (!objetos.contains(objeto)) {
-                            objetos.add(objeto);
-                            return "Objeto criado!";
-                        }
-                        return "Acesso concedido!";
+                if (operacao.equals("ler") && usuario.isPodeLer()) {
+                    if (!objetos.contains(objeto)) {
+                        return "Objeto nao existe!";
                     }
-                }
-                if (!objetos.contains(objeto)) {
-                    objetos.add(objeto);
-                    return "Objeto nao existe!";
+                    return "Acesso concedido!";
+
+                } else if (operacao.equals("escrever") && usuario.isPodeEscrever()) {
+                    if (!objetos.contains(objeto)) {
+                        objetos.add(objeto);
+                        return "Objeto criado!";
+                    }
+                    return "Acesso concedido!";
                 }
                 return "Acesso negado!";
             }
