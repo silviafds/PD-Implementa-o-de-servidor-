@@ -78,6 +78,8 @@ public class Main {
                 }
             }while (op != 3);
 
+            System.out.println("\n\nFim do programa!");
+
         } catch (Exception e) {
             System.out.println("Erro: " + e.getMessage());
             e.printStackTrace();

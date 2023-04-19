@@ -67,6 +67,7 @@ public class Servidor {
 
         } catch (RemoteException | MalformedURLException e) {
             System.out.println("Sistema com ERRO!!!!");
+            e.printStackTrace();
         }
     }
 }
