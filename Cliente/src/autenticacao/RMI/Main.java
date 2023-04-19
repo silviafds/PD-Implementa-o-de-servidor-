@@ -16,14 +16,13 @@ public class Main {
             // Obter objeto de forma remota
             Autenticacao auth = (Autenticacao) Naming.lookup("rmi://127.0.0.1:1099/AutenticacaoImpl");
 
-
             do {
                 System.out.println("\n------------- MENU -------------");
                 System.out.println("1 - Registrar novo usuario");
                 System.out.println("2 - Solicitar acesso a um objeto");
                 System.out.println("3 - Sair");
                 System.out.println("--------------------------------");
-                System.out.print("\nDigite sua op��o: ");
+                System.out.print("\nDigite sua opção: ");
                 op = sc.nextInt();
                 sc.nextLine();
 
@@ -34,23 +33,23 @@ public class Main {
                         System.out.print("Digite a sua senha: ");
                         String senhaCriador = sc.nextLine();
                         if (auth.ehAdmin(nomeCriador, senhaCriador)) {
-                            System.out.print("Digite o nome do usu�rio a ser registrado: ");
+                            System.out.print("Digite o nome do usuário a ser registrado: ");
                             String nome = sc.nextLine();
-                            System.out.print("Digite a senha do usu�rio a ser registrado: ");
+                            System.out.print("Digite a senha do usuário a ser registrado: ");
                             String senha = sc.nextLine();
-                            System.out.print("O novo usu�rio ter� permiss�o de leitura? (s/n): ");
+                            System.out.print("O novo usuário terá permissão de leitura? (s/n): ");
                             String podeLer = sc.nextLine();
-                            System.out.print("O novo usu�rio ter� permiss�o de escrita? (s/n): ");
+                            System.out.print("O novo usuário terá permissão de escrita? (s/n): ");
                             String podeEscrever = sc.nextLine();
-                            System.out.print("O novo usu�rio ser� administrador? (s/n): ");
+                            System.out.print("O novo usuário será administrador? (s/n): ");
                             String ehAdmin = sc.nextLine();
                             if (auth.registraUsuario( nome, senha, podeLer.equals("s"), podeEscrever.equals("s"), ehAdmin.equals("s"))) {
-                                System.out.println("\nUsu�rio registrado com sucesso!");
+                                System.out.println("\nUsuário registrado com sucesso!");
                             } else {
-                                System.out.println("\nErro ao registrar usu�rio!");
+                                System.out.println("\nErro ao registrar usuário!");
                             }
                         } else {
-                            System.out.println("\nVoc� n�o tem permiss�o para registrar usu�rios!");
+                            System.out.println("\nVocê não tem permissão para registrar usuários!");
                         }
                         break;
 
@@ -61,21 +60,21 @@ public class Main {
                         String senhaUsuario = sc.nextLine();
                         System.out.print("Digite o nome do objeto que deseja acessar: ");
                         String nomeObjeto = sc.nextLine();
-                        System.out.print("Digite a opera��o que deseja realizar (1 - Ler | 2 - Escrever): ");
+                        System.out.print("Digite a operação que deseja realizar (1 - Ler | 2 - Escrever): ");
                         String operacao = sc.nextLine();
                         if (operacao.equals("1")) {
                             System.out.println("\n" + auth.solicitaAcesso(nomeUsuario, senhaUsuario, nomeObjeto, "ler"));
                         } else if (operacao.equals("2")) {
                             System.out.println("\n" + auth.solicitaAcesso(nomeUsuario, senhaUsuario, nomeObjeto, "escrever"));
                         } else {
-                            System.out.println("\nOpera��o inv�lida!");
+                            System.out.println("\nOperação inválida!");
                             break;
                         }
                         break;
 
                     case 3: break;
 
-                    default: System.out.println("Op��o inv�lida!");
+                    default: System.out.println("Opção inválida!");
                 }
             }while (op != 3);
 

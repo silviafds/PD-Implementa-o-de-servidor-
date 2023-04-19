@@ -23,7 +23,7 @@ public class Servidor {
 
             Naming.rebind("rmi://127.0.0.1:1099/AutenticacaoImpl", autenticacao);
 
-            // Cria usuário administrador
+            // Cria usuario administrador
             autenticacao.registraUsuario("admin", "admin", true, true, true);
 
             System.out.println("Servidor pronto!");
@@ -31,11 +31,11 @@ public class Servidor {
             do {
                 System.out.println("\n------------- MENU -------------");
                 System.out.println("1 - Listar objetos remotos");
-                System.out.println("2 - Listar usuários registrados");
+                System.out.println("2 - Listar usuarios registrados");
                 System.out.println("3 - Listar objetos");
                 System.out.println("4 - Encerrar servidor");
                 System.out.println("--------------------------------");
-                System.out.print("\nDigite sua opção: ");
+                System.out.print("\nDigite sua opcao: ");
                 op = sc.nextInt();
                 sc.nextLine();
 
@@ -59,7 +59,7 @@ public class Servidor {
                         break;
 
                     default:
-                        System.out.println("Opção inválida!");
+                        System.out.println("Opcao invalida!");
                 }
             } while (op != 4);
 
