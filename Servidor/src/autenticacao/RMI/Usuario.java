@@ -1,7 +1,5 @@
 package autenticacao.RMI;
 
-import java.rmi.RemoteException;
-
 public class Usuario {
 
     private String nome;
@@ -51,9 +49,5 @@ public class Usuario {
 
     public void setPodeEscrever(boolean podeEscrever) {
         this.podeEscrever = podeEscrever;
-    }
-
-    public String solicitaAcesso(Autenticacao auth, String nome, String senha, String objeto, String operacao) throws RemoteException {
-        return auth.solicitaAcesso(nome, senha, objeto, operacao);
     }
 }

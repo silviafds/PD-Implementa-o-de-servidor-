@@ -33,7 +33,8 @@ public class Servidor {
                 System.out.println("1 - Listar objetos remotos");
                 System.out.println("2 - Listar usuarios registrados");
                 System.out.println("3 - Listar objetos");
-                System.out.println("4 - Encerrar servidor");
+                System.out.println("4 - Resetar usuarios e objetos");
+                System.out.println("5 - Encerrar servidor");
                 System.out.println("--------------------------------");
                 System.out.print("\nDigite sua opcao: ");
                 op = sc.nextInt();
@@ -56,12 +57,16 @@ public class Servidor {
                         break;
 
                     case 4:
+                        ((AutenticacaoImpl) autenticacao).reset();
+                        break;
+
+                    case 5:
                         break;
 
                     default:
                         System.out.println("Opcao invalida!");
                 }
-            } while (op != 4);
+            } while (op != 5);
 
             System.out.println("\n\nServidor encerrado!");
 

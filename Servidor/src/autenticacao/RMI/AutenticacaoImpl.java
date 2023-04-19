@@ -90,7 +90,7 @@ public class AutenticacaoImpl extends UnicastRemoteObject implements Autenticaca
 
     public void listaUsuarios() throws RemoteException {
         if (usuarios.isEmpty()) {
-            System.out.println("Nenhum usuario cadastrado");
+            System.out.println("\nNenhum usuario cadastrado");
         } else {
             System.out.println();
             for (Usuario usuario : usuarios) {
@@ -99,6 +99,7 @@ public class AutenticacaoImpl extends UnicastRemoteObject implements Autenticaca
                 System.out.println("Senha: " + usuario.getSenha());
                 System.out.println("Leitura: " + usuario.isPodeLer());
                 System.out.println("Escrita: " + usuario.isPodeEscrever());
+                System.out.println("Eh Admin: " + (usuario instanceof Administrador));
             }
             System.out.println("--------------------------------\n");
         }
@@ -124,5 +125,12 @@ public class AutenticacaoImpl extends UnicastRemoteObject implements Autenticaca
             }
         }
         return null;
+    }
+
+    public void reset() throws RemoteException {
+        usuarios.clear();
+        registraUsuario("admin", "admin", true, true, true);
+        objetos.clear();
+        System.out.println("\nUsuarios e objetos resetados!");
     }
 }
