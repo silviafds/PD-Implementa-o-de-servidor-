@@ -5,13 +5,13 @@ import java.rmi.RemoteException;
 
 public interface Autenticacao extends Remote {
 
-    // Método que cadastra novo usuário
+    // Metodo que cadastra novo usuario
     boolean registraUsuario(String nome, String senha, boolean podeLer, boolean podeEscrever, boolean ehAdmin) throws RemoteException;
 
-    // Método que autentica um usuário e o autoriza a operar um objeto
+    // Metodo que autentica um usuario e o autoriza a operar um objeto
     String solicitaAcesso(String nome, String senha, String objeto, String operacao) throws RemoteException;
 
-    // Método que verifica se um usuario é administrador
+    // Metodo que verifica se um usuario eh administrador
     boolean ehAdmin(String nome, String senha) throws RemoteException;
 
 }

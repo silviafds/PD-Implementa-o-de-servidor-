@@ -63,6 +63,8 @@ public class Servidor {
                 }
             } while (op != 4);
 
+            System.out.println("\n\nServidor encerrado!");
+
         } catch (RemoteException | MalformedURLException e) {
             System.out.println("Sistema com ERRO!!!!");
         }
